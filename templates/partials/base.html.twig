@@ -5,7 +5,7 @@
 
         {% if app.request.attributes.get('_route') == 'home' %}
             <title>Accueil - CRUD Croustillant</title>
-        {% elseif app.request.attributes.get('_route') == 'burger_list' %}
+        {% elseif app.request.attributes.get('_route') == 'burger_index' %}
             <title>Liste des burgers - CRUD Croustillant</title>
         {% endif %}
 
@@ -19,7 +19,10 @@
     <nav>
         <ul>
             <li><a href="{{ path('home') }}">Accueil</a></li>
-            <li><a href="{{ path('burgers_list') }}">Liste des burgers</a></li>
+            <li><a href="{{ path('burger_index') }}">Liste des burgers</a></li>
+            <li><a href="{{ path('pain_index') }}">Liste des pains</a></li>
+            <li><a href="{{ path('oignon_index') }}">Liste des oignon</a></li>
+            <li><a href="{{ path('sauce_index') }}">Liste des sauces</a></li>
         </ul>
     </nav>
 </header>

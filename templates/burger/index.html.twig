@@ -1,0 +1,20 @@
+{% include 'partials/base.html.twig' %}
+
+{% block content %}
+<h1>Liste des burgers</h1>
+
+{% if burgers is not empty %}
+    <ul>
+    {% for burger in burgers %}
+        <li>
+            {{ burger.name }} - {{ burger.price }} €
+            {% if burger.description %}
+                <p>{{ burger.description }}</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun burger disponible.</p>
+{% endif %}
+{% endblock %}

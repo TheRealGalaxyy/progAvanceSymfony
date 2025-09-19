@@ -1,0 +1,15 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<h1>Liste des images de burgers</h1>
+
+{% if images is not empty %}
+    <ul>
+    {% for image in images %}
+        <li>{{ image.name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucune image disponible.</p>
+{% endif %}
+{% endblock %}

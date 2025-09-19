@@ -1,0 +1,15 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<h1>Liste des sauces</h1>
+
+{% if sauces is not empty %}
+    <ul>
+    {% for sauce in sauces %}
+        <li>{{ sauce.name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucune sauce disponible.</p>
+{% endif %}
+{% endblock %}

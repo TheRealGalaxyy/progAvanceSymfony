@@ -1,0 +1,15 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<h1>Liste des pains</h1>
+
+{% if pains is not empty %}
+    <ul>
+    {% for pain in pains %}
+        <li>{{ pain.name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun pain disponible.</p>
+{% endif %}
+{% endblock %}

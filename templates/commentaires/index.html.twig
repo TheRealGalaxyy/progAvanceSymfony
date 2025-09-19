@@ -1,0 +1,15 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<h1>Liste des Commentaires de burgers</h1>
+
+{% if commentaires is not empty %}
+    <ul>
+    {% for commentaire in commentaires %}
+        <li>{{ commentaire.name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun commentaire disponible.</p>
+{% endif %}
+{% endblock %}
