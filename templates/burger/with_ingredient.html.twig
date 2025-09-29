@@ -1,0 +1,17 @@
+{% extends "partials/base.html.twig" %}
+
+{% block content %}
+    <h1>Burgers avec un minimum de {{min}} ingrédients</h1>
+
+    <ul>
+        {% for burger in burgers %}
+            <li>
+                <strong>{{ burger.name }}</strong> – {{ burger.price }} €  
+                <br>
+                Nombre d’ingrédients : {{ burger.nbIngredients ?? 'inconnu' }}
+            </li>
+        {% else %}
+            <li>Aucun burger trouvé.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

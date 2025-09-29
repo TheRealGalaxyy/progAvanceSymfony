@@ -6,7 +6,11 @@
 {% if oignons is not empty %}
     <ul>
     {% for oignon in oignons %}
-        <li>{{ oignon.name }}</li>
+        <li>
+            {{ oignon.name }}
+            <a class="btn btn-avec" href="/burgers/oignons/{{ oignon.name }}">Avec</a>
+            <a class="btn btn-sans" href="/burgers/without/oignons/{{ oignon.name }}">Sans</a>
+        </li>
     {% endfor %}
     </ul>
 {% else %}

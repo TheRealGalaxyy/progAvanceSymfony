@@ -63,6 +63,18 @@ class BurgerController extends AbstractController
         ]);
     }
 
+    #[Route('/burgers/without/{field}/{name}', name: 'burgers_without_ingredient')]
+    public function withoutIngredient(string $field, string $name, BurgerRepository $burgerRepository): Response
+    {
+        $burgers = $burgerRepository->findWithoutIngredient($field, $name);
+
+        return $this->render('burger/without_ingredient.html.twig', [
+            'burgers' => $burgers,
+            'ingredientType' => $field,
+            'ingredientName' => $name,
+        ]);
+    }
+
     #[Route('/burgers/price', name: 'burgers_by_price')]
     public function fiveBurgersByPrice(BurgerRepository $burgerRepository): Response
     {
@@ -72,5 +84,17 @@ class BurgerController extends AbstractController
             'burgers' => $burgers,
         ]);
     }
+
+    #[Route('/burgers/min{min}', name: 'burger_min_ingredients')]
+    public function burgersWithMinIngredients(BurgerRepository $burgerRepository, int $min): Response
+    {
+        $burgers = $burgerRepository->findBurgersByMinIngredients($min);
+
+        return $this->render('burger/with_ingredient.html.twig', [
+            'burgers' => $burgers,
+            'min' => $min,
+        ]);
+    }
+
 
 }

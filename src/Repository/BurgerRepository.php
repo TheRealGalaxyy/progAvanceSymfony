@@ -39,6 +39,36 @@ class BurgerRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findWithoutIngredient(string $ingredientField, string $ingredientName): array
+    {
+        $dql = "SELECT b
+                FROM App\Entity\Burger b
+                JOIN b.$ingredientField i
+                WHERE i.name != :name";
+
+        return $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('name', $ingredientName)
+            ->getResult();
+    }
+
+    public function findBurgersByMinIngredients(int $min): array
+    {
+        return $this->getEntityManager()->createQuery(
+            'SELECT b, (COUNT(DISTINCT p) + COUNT(DISTINCT o) + COUNT(DISTINCT s)) AS HIDDEN nbIngredients
+            FROM App\Entity\Burger b
+            LEFT JOIN b.pain p
+            LEFT JOIN b.oignons o
+            LEFT JOIN b.sauces s
+            GROUP BY b.id
+            HAVING (COUNT(DISTINCT p) + COUNT(DISTINCT o) + COUNT(DISTINCT s)) >= :min'
+        )
+        ->setParameter('min', $min)
+        ->getResult();
+    }
+
+
+
     //    /**
     //     * @return Burger[] Returns an array of Burger objects
     //     */

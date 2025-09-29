@@ -6,7 +6,11 @@
 {% if pains is not empty %}
     <ul>
     {% for pain in pains %}
-        <li>{{ pain.name }}</li>
+        <li>
+            {{ pain.name }}
+            <a class="btn btn-avec" href="/burgers/pain/{{ pain.name }}">Avec</a>
+            <a class="btn btn-sans" href="/burgers/without/pain/{{ pain.name }}">Sans</a>
+        </li>
     {% endfor %}
     </ul>
 {% else %}

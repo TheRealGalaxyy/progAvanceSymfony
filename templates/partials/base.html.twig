@@ -10,6 +10,7 @@
         {% endif %}
 
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
         {% block stylesheets %}{% endblock %}
     </head>
@@ -20,13 +21,9 @@
         <ul>
             <li><a href="{{ path('home') }}">Accueil</a></li>
             <li><a href="{{ path('burger_index') }}">Liste des burgers</a></li>
-            <ul>
-                <li><a href="{{ path('burgers_by_price') }}">Nos burgers les plus chers</a></li>
-                <li> 
-                    Pour rechercher un burger par ingrédient, veuillez taper un url du type : 
-                    <br> "/burger/type_de_l'ingrédient/nom_de_l'ingrédient"
-                </li>
-            </ul>
+            <li>
+                <a href="{{ path('burgers_by_price') }}">Nos burgers les plus chers</a>
+            </li>
             <li><a href="{{ path('pain_index') }}">Liste des pains</a></li>
             <li><a href="{{ path('oignon_index') }}">Liste des oignon</a></li>
             <li><a href="{{ path('sauce_index') }}">Liste des sauces</a></li>
