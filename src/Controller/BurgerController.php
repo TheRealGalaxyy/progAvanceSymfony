@@ -3,11 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Burger;
-use App\Entity\Commentaire;
-use App\Entity\Image;
-use App\Entity\Oignon;
-use App\Entity\Pain;
-use App\Entity\Sauce;
+use App\Repository\BurgerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,4 +35,42 @@ class BurgerController extends AbstractController
     
         return new Response('Burger créé avec succès !');
     }
+
+    #[Route('/burgers/{id}/delete', name: 'burger_delete')]
+    public function delete(EntityManagerInterface $entityManager, int $id): Response
+    {
+        $burger = $entityManager->getRepository(Burger::class)->find($id);
+
+        if (!$burger) {
+            throw $this->createNotFoundException('Le burger avec l\'ID ' . $id . ' n\'existe pas.');
+        }
+
+        $entityManager->remove($burger);
+        $entityManager->flush();
+
+        return new Response('Burger supprimé avec succès !');
+    }
+
+    #[Route('/burgers/{field}/{name}', name: 'burgers_by_ingredient')]
+    public function byIngredient(string $field, string $name, BurgerRepository $burgerRepository): Response
+    {
+        $burgers = $burgerRepository->findByIngredient($field, $name);
+
+        return $this->render('burger/by_ingredient.html.twig', [
+            'burgers' => $burgers,
+            'ingredientType' => $field,
+            'ingredientName' => $name,
+        ]);
+    }
+
+    #[Route('/burgers/price', name: 'burgers_by_price')]
+    public function fiveBurgersByPrice(BurgerRepository $burgerRepository): Response
+    {
+        $burgers = $burgerRepository->fiveBurgersByPrice();
+
+        return $this->render('burger/price.html.twig', [
+            'burgers' => $burgers,
+        ]);
+    }
+
 }

@@ -16,6 +16,29 @@ class BurgerRepository extends ServiceEntityRepository
         parent::__construct($registry, Burger::class);
     }
 
+    public function findByIngredient(string $ingredientField, string $ingredientName): array
+    {
+        $dql = "SELECT b
+                FROM App\Entity\Burger b
+                JOIN b.$ingredientField i
+                WHERE i.name = :name";
+
+        return $this->getEntityManager()
+            ->createQuery($dql)
+            ->setParameter('name', $ingredientName)
+            ->getResult();
+    }
+
+    public function fiveBurgersByPrice(): array
+    {
+        $dql = "SELECT b FROM App\Entity\Burger b ORDER BY b.price DESC";
+
+        return $this->getEntityManager()
+            ->createQuery($dql)
+            ->setMaxResults(5)
+            ->getResult();
+    }
+
     //    /**
     //     * @return Burger[] Returns an array of Burger objects
     //     */

@@ -20,6 +20,13 @@
         <ul>
             <li><a href="{{ path('home') }}">Accueil</a></li>
             <li><a href="{{ path('burger_index') }}">Liste des burgers</a></li>
+            <ul>
+                <li><a href="{{ path('burgers_by_price') }}">Nos burgers les plus chers</a></li>
+                <li> 
+                    Pour rechercher un burger par ingrédient, veuillez taper un url du type : 
+                    <br> "/burger/type_de_l'ingrédient/nom_de_l'ingrédient"
+                </li>
+            </ul>
             <li><a href="{{ path('pain_index') }}">Liste des pains</a></li>
             <li><a href="{{ path('oignon_index') }}">Liste des oignon</a></li>
             <li><a href="{{ path('sauce_index') }}">Liste des sauces</a></li>
